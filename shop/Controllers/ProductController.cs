@@ -6,23 +6,23 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
+        private readonly ProductsStorage _productsStorage;
+
+        public ProductController()
+        {
+            _productsStorage = new ProductsStorage();
+        }
+
         public string Index(int id = 1)
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "products.json");
-            var json = System.IO.File.ReadAllText(filePath);
+            var product = _productsStorage.TryGetById(id);
 
-            var products = JsonSerializer.Deserialize<List<Product>>(json);
-
-            var product = products.FirstOrDefault(p => p.Id == id);
-
-            if (product != null)
+            if (product == null)
             {
-                return $"Id: {product.Id}\nНазвание: {product.Name}\nСтоимость: {product.Cost: 0.00}\nОписание: {product.Description}";
+                return $"Продукта с Id = {id} не существует";
             }
-            else
-            {
-                return "Товара с таким id нет.";
-            }
+
+            return product.ToString();
         }
     }
 }
