@@ -16,18 +16,11 @@ namespace shop.Controllers
             _productsStorage = new ProductsStorage();
         }
 
-        public string Index()
+        public IActionResult Index()
         {
             var products = _productsStorage.GetAll();
 
-            var result = "";
-
-            foreach (var product in products)
-            {
-                result += $"{product}\n\n";
-            }
-
-            return result;
+            return View(products);
         }
 
         public IActionResult Privacy()
