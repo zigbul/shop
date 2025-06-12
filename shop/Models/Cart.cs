@@ -2,11 +2,19 @@
 {
     public class Cart
     {
-        public List<Position> Positions;
+        public Guid Id { get; set; }
 
-        public Cart() 
+        public string UserId { get; set; }
+
+        public List<CartItem> Items { get; set; }
+
+        public decimal Cost => Items.Sum(item => item.Cost);
+
+        public Cart(string userId)
         {
-            Positions = new List<Position>();
+            Id = Guid.NewGuid();
+            UserId = userId;
+            Items = new List<CartItem>();
         }
     }
 }
