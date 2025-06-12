@@ -9,9 +9,9 @@ namespace shop.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ProductsStorage _productsStorage;
+        private readonly IProductsStorage _productsStorage;
 
-        public HomeController(ProductsStorage productsStorage)
+        public HomeController(IProductsStorage productsStorage)
         {
             _productsStorage = productsStorage;
         }

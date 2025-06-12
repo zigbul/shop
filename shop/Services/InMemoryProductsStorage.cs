@@ -2,7 +2,7 @@
 
 namespace OnlineShopWebApp.Services
 {
-    public class ProductsStorage
+    public class InMemoryProductsStorage : IProductsStorage
     {
         private List<Product> products = new List<Product>()
         {

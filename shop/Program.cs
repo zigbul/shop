@@ -2,8 +2,8 @@ using OnlineShopWebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<ProductsStorage>();
-builder.Services.AddSingleton<CartsStorage>();
+builder.Services.AddSingleton<IProductsStorage, InMemoryProductsStorage>();
+builder.Services.AddSingleton<ICartsStorage, InMemoryCartsStorage>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

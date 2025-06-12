@@ -2,7 +2,7 @@
 
 namespace OnlineShopWebApp.Services
 {
-    public class CartsStorage
+    public class InMemoryCartsStorage : ICartsStorage
     {
         private List<Cart> _carts = new List<Cart>();
 

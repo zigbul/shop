@@ -1,15 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
-        private ProductsStorage _productsStorage;
-        private CartsStorage _cartsStorage;
+        private IProductsStorage _productsStorage;
+        private ICartsStorage _cartsStorage;
 
-        public CartController(ProductsStorage productsStorage, CartsStorage cartsStorage) 
+        public CartController(IProductsStorage productsStorage, ICartsStorage cartsStorage) 
         {
             _productsStorage = productsStorage;
             _cartsStorage = cartsStorage;
