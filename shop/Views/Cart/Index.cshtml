@@ -17,6 +17,8 @@ else
                         <th>Цена, руб</th>
                         <th>Количество, шт</th>
                         <th>Стоимость, руб</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,6 +29,29 @@ else
                             <td>@item.Product.Cost руб</td>
                             <td>@item.Amount шт.</td>
                             <td>@item.Cost руб</td>
+                            <td>
+                                <a 
+                                    class="btn btn-light" 
+                                    type="submit"
+                                    asp-controller="Cart"
+                                    asp-action="Add"
+                                    asp-route-productId="@item.Product.Id"
+                                >
+                                    +
+                                </a>
+                            </td>
+                            <td>
+                                <a 
+                                    class="btn btn-light" 
+                                    type="button"
+                                    asp-controller="Cart"
+                                    asp-action="Remove"
+                                    asp-route-itemId="@item.Id"
+                                    asp-route-cartId="@Model.Id"
+                                >
+                                    -
+                                </a>
+                            </td>
                         </tr>
                     }
                 </tbody>

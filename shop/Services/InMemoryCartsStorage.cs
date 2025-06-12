@@ -33,5 +33,23 @@ namespace OnlineShopWebApp.Services
                 productInCart.Amount++;
             } 
         }
+
+        public void Remove(Guid itemId, Guid cartId)
+        {
+            var cart = _carts.FirstOrDefault(cart => cart.Id == cartId);
+            var cartItem = cart.Items.FirstOrDefault(item => item.Id == itemId);
+
+            cartItem.Amount--;
+
+            if (cartItem.Amount == 0)
+            {
+                cart.Items = cart.Items.Where(item => item.Id != itemId).ToList();
+            }
+
+            if (cart.Items.Count == 0)
+            {
+                _carts = _carts.Where(cart => cart.Id != cartId).ToList();
+            }
+        }
     }
 }

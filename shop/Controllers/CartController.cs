@@ -28,5 +28,12 @@ namespace OnlineShopWebApp.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult Remove(Guid itemId, Guid cartId)
+        {
+            _cartsStorage.Remove(itemId, cartId);
+
+            return RedirectToAction("Index");
+        }
     }
 }
