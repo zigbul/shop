@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Services;
 using shop.Models;
 
 namespace shop.Controllers
@@ -11,9 +11,9 @@ namespace shop.Controllers
     {
         private readonly ProductsStorage _productsStorage;
 
-        public HomeController()
+        public HomeController(ProductsStorage productsStorage)
         {
-            _productsStorage = new ProductsStorage();
+            _productsStorage = productsStorage;
         }
 
         public IActionResult Index()

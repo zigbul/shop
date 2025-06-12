@@ -1,17 +1,17 @@
 ﻿using OnlineShopWebApp.Models;
 
-namespace OnlineShopWebApp
+namespace OnlineShopWebApp.Services
 {
-    public static class CartsStorage
+    public class CartsStorage
     {
-        private static List<Cart> _carts = new List<Cart>();
+        private List<Cart> _carts = new List<Cart>();
 
-        public static Cart? TryGetCardByUserId(string userId)
+        public Cart? TryGetCardByUserId(string userId)
         {
             return _carts.FirstOrDefault(cart => cart.UserId == userId);
         }
 
-        public static void Add(Product product, string userId)
+        public void Add(Product product, string userId)
         {
             var cart = TryGetCardByUserId(userId);
 
