@@ -1,0 +1,43 @@
+﻿@using OnlineShopWebApp.Models
+
+@model Cart;
+
+@if (Model == null || Model.Items.Count == 0)
+{
+    <h3>Корзина пустая</h3>
+}
+else
+{
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Цена, руб</th>
+                        <th>Количество, шт</th>
+                        <th>Стоимость, руб</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model.Items)
+                    {
+                        <tr>
+                            <td>@item.Product.Name</td>
+                            <td>@item.Product.Cost руб</td>
+                            <td>@item.Amount шт.</td>
+                            <td>@item.Cost руб</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <h4 class="text-end">Итого:<br />@Model.Cost руб</h4>
+
+            <div class="d-flex justify-content-between">
+                <a class="btn btn-primary" href="/home/index">Продолжить покупки</a>
+                <a class="btn btn-success" href="#">Офромить заказ</a>
+            </div>
+        </div>        
+    </div>
+}
