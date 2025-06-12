@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp;
 using OnlineShopWebApp.Models;
 using shop.Models;
 
@@ -8,22 +9,18 @@ namespace shop.Controllers
 {
     public class HomeController : Controller
     {
-        public string Index()
+        private readonly ProductsStorage _productsStorage;
+
+        public HomeController()
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "products.json");
-            var json = System.IO.File.ReadAllText(filePath);
-            var products = JsonSerializer.Deserialize<List<Product>>(json);
+            _productsStorage = new ProductsStorage();
+        }
 
-            var result = "";
+        public IActionResult Index()
+        {
+            var products = _productsStorage.GetAll();
 
-            foreach (var product in products)
-            {
-                result += $"ID: {product.Id}\n" +
-                          $"Name: {product.Name}\n" +
-                          $"Cost: {product.Cost}\n\n";
-            }
-
-            return result;
+            return View(products);
         }
 
         public IActionResult Privacy()
