@@ -1,16 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Models;
-using System.Text.Json;
+using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly ProductsStorage _productsStorage;
+        private readonly IProductsStorage _productsStorage;
 
-        public ProductController()
+        public ProductController(IProductsStorage productsStorage)
         {
-            _productsStorage = new ProductsStorage();
+            _productsStorage = productsStorage;
         }
 
         public IActionResult Index(int id = 1)

@@ -17,6 +17,8 @@ else
                         <th>Цена, руб</th>
                         <th>Количество, шт</th>
                         <th>Стоимость, руб</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,6 +29,29 @@ else
                             <td>@item.Product.Cost руб</td>
                             <td>@item.Amount шт.</td>
                             <td>@item.Cost руб</td>
+                            <td>
+                                <a 
+                                    class="btn btn-light" 
+                                    type="submit"
+                                    asp-controller="Cart"
+                                    asp-action="Add"
+                                    asp-route-productId="@item.Product.Id"
+                                >
+                                    +
+                                </a>
+                            </td>
+                            <td>
+                                <a 
+                                    class="btn btn-light" 
+                                    type="button"
+                                    asp-controller="Cart"
+                                    asp-action="Remove"
+                                    asp-route-itemId="@item.Id"
+                                    asp-route-cartId="@Model.Id"
+                                >
+                                    -
+                                </a>
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -36,7 +61,7 @@ else
 
             <div class="d-flex justify-content-between">
                 <a class="btn btn-primary" href="/home/index">Продолжить покупки</a>
-                <a class="btn btn-success" href="#">Офромить заказ</a>
+                <a class="btn btn-success" href="/order/index">Офромить заказ</a>
             </div>
         </div>        
     </div>

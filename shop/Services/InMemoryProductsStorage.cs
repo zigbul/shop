@@ -1,10 +1,10 @@
 ﻿using OnlineShopWebApp.Models;
 
-namespace OnlineShopWebApp
+namespace OnlineShopWebApp.Services
 {
-    public class ProductsStorage
+    public class InMemoryProductsStorage : IProductsStorage
     {
-        private static List<Product> products = new List<Product>()
+        private List<Product> products = new List<Product>()
         {
             new Product("Хлеб", 55, "Свежий, душистый каравай — основа крестьянского рациона. Скромный, но спасает от голода."),
             new Product("Сыр", 125, "Выдержанный, ароматный ломоть — пища аристократов и мышей. Дарует силу и удовольствие."),

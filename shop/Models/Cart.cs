@@ -10,6 +10,8 @@
 
         public decimal Cost => Items.Sum(item => item.Cost);
 
+        public int ItemsAmount =>  Items.Sum(item => item.Amount);
+
         public Cart(string userId)
         {
             Id = Guid.NewGuid();
