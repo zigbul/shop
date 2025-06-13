@@ -3,20 +3,20 @@
         <label class="fw-bold" for="name">
             Имя
         </label>
-        <input type="text" placeholder="Ваше имя..." id="name" />
-        <label class="fw-bold" for="lastname">
-            Фамилия
+        <input type="text" placeholder="Ваше имя..." name="name" />
+        <label class="fw-bold" for="address">
+            Адрес
         </label>
-        <input type="text" placeholder="Ваша фамилия..." id="lastname"/>
+        <input type="text" placeholder="Ваш адрec..." name="address"/>
         <label class="fw-bold" for="email">
             Почта
         </label>
-        <input type="email" placeholder="Ваша почта..." id="email" />
+        <input type="email" placeholder="Ваша почта..." name="email" />
         <label class="fw-bold" for="tel">
             Номер телефона
         </label>
-        <input type="tel" placeholder="Ваш тел..." id="tel" />
-        <a class="btn btn-success" href="/order/buy">Оформить</a>
+        <input type="tel" placeholder="Ваш тел..." name="tel" />
+        <a class="btn btn-success" asp-controller="Order" asp-action="Buy">Оформить</a>
     </form>
 </div>
 

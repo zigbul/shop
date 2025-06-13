@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Controllers
@@ -19,12 +20,14 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
-        public IActionResult Buy()
+        public IActionResult Buy(Order order)
         {
             var cart = _cartsStorage.TryGetCardByUserId("1");
 
+            order.cart = cart;
+
+            _ordersStorage.Add(order);
             _cartsStorage.Remove(cart);
-            _ordersStorage.Add(cart);
 
             return View();
         }

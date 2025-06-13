@@ -4,6 +4,6 @@ namespace OnlineShopWebApp.Services
 {
     public interface IOrdersStorage
     {
-        void Add(Cart cart);
+        void Add(Order order);
     }
 }
