@@ -1,0 +1,15 @@
+﻿<form method="post"
+      class="d-flex flex-column align-items-center gap-2">
+    <h3>Вход</h3>
+    <input placeholder="Логин" name="login" />
+    <input placeholder="Пароль" name="password" />
+    <label>
+        <input type="checkbox" name="isRemember" /> Запомнить меня?
+    </label>
+    <button class="btn btn-dark" type="submit">Войти</button>
+    <a class="text-decoration-none text-black"
+       asp-controller="Registration"
+       asp-action="Index">
+        Регистрация нового пользователя
+    </a>
+</form>
