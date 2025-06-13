@@ -52,14 +52,9 @@ namespace OnlineShopWebApp.Services
             }
         }
 
-        public void RemoveCartByUserId(string userId)
+        public void Remove(Cart cart)
         {
-            var userCart = _carts.FirstOrDefault(cart => cart.UserId == userId);
-
-            if (userCart != null)
-            {
-                _carts.Remove(userCart);
-            }
+            _carts.Remove(cart);
         }
     }
 }

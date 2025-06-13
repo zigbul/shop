@@ -4,6 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<IProductsStorage, InMemoryProductsStorage>();
 builder.Services.AddSingleton<ICartsStorage, InMemoryCartsStorage>();
+builder.Services.AddSingleton<IOrdersStorage, InMemoryOrdersStorage>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

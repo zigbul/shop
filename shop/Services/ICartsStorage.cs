@@ -10,6 +10,6 @@ namespace OnlineShopWebApp.Services
 
         public void DecreaseItemAmount(Guid itemId, Guid cartId);
 
-        public void RemoveCartByUserId(string userId);
+        public void Remove(Cart cart);
     }
 }
