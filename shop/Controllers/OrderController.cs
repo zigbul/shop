@@ -20,6 +20,7 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
+        [HttpPost]
         public IActionResult Buy(Order order)
         {
             var cart = _cartsStorage.TryGetCardByUserId("1");
