@@ -11,7 +11,7 @@ namespace OnlineShopWebApp.Services
             return _carts.FirstOrDefault(cart => cart.UserId == userId);
         }
 
-        public void Add(Product product, string userId)
+        public void IncreaseItemAmount(Product product, string userId)
         {
             var cart = TryGetCardByUserId(userId);
 
@@ -34,7 +34,7 @@ namespace OnlineShopWebApp.Services
             } 
         }
 
-        public void Remove(Guid itemId, Guid cartId)
+        public void DecreaseItemAmount(Guid itemId, Guid cartId)
         {
             var cart = _carts.FirstOrDefault(cart => cart.Id == cartId);
             var cartItem = cart.Items.FirstOrDefault(item => item.Id == itemId);
@@ -49,6 +49,16 @@ namespace OnlineShopWebApp.Services
             if (cart.Items.Count == 0)
             {
                 _carts = _carts.Where(cart => cart.Id != cartId).ToList();
+            }
+        }
+
+        public void RemoveCartByUserId(string userId)
+        {
+            var userCart = _carts.FirstOrDefault(cart => cart.UserId == userId);
+
+            if (userCart != null)
+            {
+                _carts.Remove(userCart);
             }
         }
     }

@@ -6,8 +6,10 @@ namespace OnlineShopWebApp.Services
     {
         public Cart? TryGetCardByUserId(string userId);
 
-        public void Add(Product product, string userId);
+        public void IncreaseItemAmount(Product product, string userId);
 
-        public void Remove(Guid itemId, Guid cartId);
+        public void DecreaseItemAmount(Guid itemId, Guid cartId);
+
+        public void RemoveCartByUserId(string userId);
     }
 }

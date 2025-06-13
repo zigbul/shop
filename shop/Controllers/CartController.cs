@@ -24,14 +24,14 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Add(int productId, string userId = "1")
         {
             var product = _productsStorage.TryGetById(productId);
-            _cartsStorage.Add(product, userId);
+            _cartsStorage.IncreaseItemAmount(product, userId);
 
             return RedirectToAction("Index");
         }
 
         public IActionResult Remove(Guid itemId, Guid cartId)
         {
-            _cartsStorage.Remove(itemId, cartId);
+            _cartsStorage.DecreaseItemAmount(itemId, cartId);
 
             return RedirectToAction("Index");
         }
