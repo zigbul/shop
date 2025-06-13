@@ -4,9 +4,14 @@
     <input placeholder="Логин" name="login" />
     <input placeholder="Пароль" name="password" />
     <label>
-        <input type="checkbox" name="isRemember" /> Запомнить меня?
+        <input type="checkbox" name="isRemembered" value="true" /> Запомнить меня?
     </label>
-    <button class="btn btn-dark" type="submit">Войти</button>
+    <button class="btn btn-dark"
+            type="submit"
+            asp-controller="Authorization"
+            asp-action="Enter">
+        Войти
+    </button>
     <a class="text-decoration-none text-black"
        asp-controller="Registration"
        asp-action="Index">
