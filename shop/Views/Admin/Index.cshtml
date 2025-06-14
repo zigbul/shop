@@ -52,7 +52,7 @@
                 <h2>Список ролей</h2>
                 break;
             case AdminMenuItems.Products:
-                <h2>Список продуктов</h2>
+                @await Component.InvokeAsync("AdminProducts")
                 break;
             default:
                 break;
