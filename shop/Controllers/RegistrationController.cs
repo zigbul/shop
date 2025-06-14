@@ -2,7 +2,7 @@
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class AuthorizationController : Controller
+    public class RegistrationController : Controller
     {
         public IActionResult Index()
         {
@@ -10,7 +10,7 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult SignIn(string login, string password, bool isRemembered)
+        public IActionResult SignUp(string login, string password, string confirmPassword)
         {
             return RedirectToAction("Index");
         }
