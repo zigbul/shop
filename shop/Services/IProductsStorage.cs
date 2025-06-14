@@ -6,6 +6,8 @@ namespace OnlineShopWebApp.Services
     {
         public List<Product> GetAll();
 
+        void Remove(Product product);
+
         public Product? TryGetById(int id);
     }
 }

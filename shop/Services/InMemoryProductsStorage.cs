@@ -4,7 +4,7 @@ namespace OnlineShopWebApp.Services
 {
     public class InMemoryProductsStorage : IProductsStorage
     {
-        private List<Product> products = new List<Product>()
+        private List<Product> _products = new List<Product>()
         {
             new Product("Хлеб", 55, "Свежий, душистый каравай — основа крестьянского рациона. Скромный, но спасает от голода."),
             new Product("Сыр", 125, "Выдержанный, ароматный ломоть — пища аристократов и мышей. Дарует силу и удовольствие."),
@@ -15,12 +15,17 @@ namespace OnlineShopWebApp.Services
 
         public List<Product> GetAll()
         {
-            return products;
+            return _products;
+        }
+
+        public void Remove(Product product)
+        {
+            _products.Remove(product);
         }
 
         public Product? TryGetById(int id)
         {
-            return products.FirstOrDefault(product => product.Id == id);
+            return _products.FirstOrDefault(product => product.Id == id);
         }
     }
 }

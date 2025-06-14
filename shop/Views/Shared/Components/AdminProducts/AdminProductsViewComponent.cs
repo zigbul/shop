@@ -14,7 +14,9 @@ namespace OnlineShopWebApp.Views.Shared.Components.AdminProducts
 
         public IViewComponentResult Invoke()
         {
-            return View("AdminProducts");
+            var products = _productsStorage.GetAll();
+
+            return View("AdminProducts", products);
         }
     }
 }
