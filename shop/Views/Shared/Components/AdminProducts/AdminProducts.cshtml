@@ -14,7 +14,7 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>№</th>
+                <th>Id</th>
                 <th>Название</th>
                 <th>Цена</th>
                 <th></th>
@@ -22,24 +22,9 @@ else
             </tr>
         </thead>
         <tbody>
-            @for (int i = 1; i <= Model.Count; i++)
+            @foreach (var product in Model)
             {
-                var index = i - 1;
-
-                <tr>
-                    <td>@i</td>
-                    <td>@Model[index].Name</td>
-                    <td>@Model[index].Cost</td>
-                    <td><a class="btn">Редактировать</a></td>
-                    <td>
-                        <a class="btn"
-                           asp-controller="Admin"
-                           asp-action="DeleteProduct"
-                           asp-route-id="@Model[index].Id">
-                            Удалить
-                        </a>
-                    </td>
-                </tr>
+                @await Component.InvokeAsync("AdminProduct", new { product = product })
             }
         </tbody>
     </table>

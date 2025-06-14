@@ -1,0 +1,18 @@
+﻿@using OnlineShopWebApp.Models
+
+@model Product
+
+<tr>
+    <td>@Model.Id</td>
+    <td>@Model.Name</td>
+    <td>@Model.Cost</td>
+    <td><a class="btn">Редактировать</a></td>
+    <td>
+        <a class="btn"
+           asp-controller="Admin"
+           asp-action="DeleteProduct"
+           asp-route-id="@Model.Id">
+            Удалить
+        </a>
+    </td>
+</tr>
