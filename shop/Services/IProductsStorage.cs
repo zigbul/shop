@@ -8,6 +8,8 @@ namespace OnlineShopWebApp.Services
 
         void Remove(Product product);
 
+        public void Update(int id, string name, decimal price, string description, string imageUrl);
+
         public Product? TryGetById(int id);
     }
 }

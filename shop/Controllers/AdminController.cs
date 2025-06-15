@@ -53,6 +53,7 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult EditProduct(int id, string name, decimal price, string description, string imageUrl)
         {
+            _productsStorage.Update(id, name, price, description, imageUrl);
             return RedirectToAction("Products");
         }
 

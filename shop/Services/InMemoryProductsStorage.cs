@@ -23,6 +23,19 @@ namespace OnlineShopWebApp.Services
             _products.Remove(product);
         }
 
+        public void Update(int id, string name, decimal price, string description, string imageUrl)
+        {
+            var product = _products.FirstOrDefault(p => p.Id == id);
+
+            if (product != null)
+            {
+                product.Name = name;
+                product.Price = price;
+                product.Description = description;
+                product.ImageUrl = imageUrl;
+            }
+        }
+
         public Product? TryGetById(int id)
         {
             return _products.FirstOrDefault(product => product.Id == id);

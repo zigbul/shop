@@ -41,7 +41,14 @@
                                 </a>
                             </td>
                             <td>@product.Price</td>
-                            <td><a class="btn" asp-controller="Admin" asp-action="EditProduct">Редактировать</a></td>
+                            <td>
+                                <a class="btn"
+                                   asp-controller="Admin"
+                                   asp-action="EditProduct"
+                                   asp-route-id="@product.Id">
+                                    Редактировать
+                                </a>
+                            </td>
                             <td>
                                 <a class="btn"
                                    asp-controller="Admin"
