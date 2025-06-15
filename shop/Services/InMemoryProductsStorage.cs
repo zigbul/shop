@@ -36,6 +36,11 @@ namespace OnlineShopWebApp.Services
             }
         }
 
+        public void Add(Product product)
+        {
+            _products.Add(product);
+        }
+
         public Product? TryGetById(int id)
         {
             return _products.FirstOrDefault(product => product.Id == id);
