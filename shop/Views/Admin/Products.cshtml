@@ -1,0 +1,59 @@
+﻿@using OnlineShopWebApp.Models
+@using OnlineShopWebApp.Properties
+
+@model List<Product>
+
+<div class="row">
+    <nav class="col-3">
+        @await Html.PartialAsync("AdminNav")
+    </nav>
+    <div class="col-9">
+
+        <h2>Список продуктов</h2>
+        <a>Добавить новый продукт</a>
+
+        @if (Model.Count == 0)
+        {
+            <p>Список продуктов пуст</p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Название</th>
+                        <th>Цена</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model)
+                    {
+                        <tr>
+                            <td>@product.Id</td>
+                            <td>
+                                <a asp-controller="Admin"
+                                   asp-action="ProductDetails"
+                                   asp-route-id="@product.Id">
+                                    @product.Name
+                                </a>
+                            </td>
+                            <td>@product.Price</td>
+                            <td><a class="btn" asp-controller="Admin" asp-action="EditProduct">Редактировать</a></td>
+                            <td>
+                                <a class="btn"
+                                   asp-controller="Admin"
+                                   asp-action="DeleteProduct"
+                                   asp-route-id="@product.Id">
+                                    Удалить
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

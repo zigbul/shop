@@ -6,10 +6,10 @@
     <div class="col-6 mx-auto">
         <div class="card">
             <div class="card-body">
-                <img class="card-img-top" src="https://cdn.nur.kz/images/1120/86ae2ae56e309b71.jpeg" />
+                <img class="card-img-top" src="@Model.ImageUrl" />
                 <h2 class="card-title">@Model.Name</h2>
                 <p class="card-text">@Model.Description</p>
-                <p>Цена: @Model.Cost руб.</p>
+                <p>Цена: @Model.Price руб.</p>
                 <div class="d-flex justify-content-between">
                     <a class="btn btn-success" href="/cart/add?productId=@Model.Id">Добавить в корзину</a>
                     <a class="btn btn-primary" href="/home/index">Продолжить покупки</a>

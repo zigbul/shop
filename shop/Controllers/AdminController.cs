@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Properties;
+using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Controllers
@@ -13,9 +13,47 @@ namespace OnlineShopWebApp.Controllers
             _productsStorage = productsStorage;
         }
 
-        public IActionResult Index(AdminMenuItems item = AdminMenuItems.Orders)
+        public IActionResult Orders()
         {
-            return View(item);
+            return View();
+        }
+
+        public IActionResult Users()
+        {
+            return View();
+        }
+
+        public IActionResult Roles()
+        {
+            return View();
+        }
+
+        public IActionResult Products()
+        {
+            var products = _productsStorage.GetAll();
+
+            return View(products);
+        }
+
+        public IActionResult ProductDetails(int id)
+        {
+            var product = _productsStorage.TryGetById(id);
+
+            return View(product);
+        }
+
+        [HttpGet]
+        public IActionResult EditProduct(int id)
+        {
+            var product = _productsStorage.TryGetById(id);
+
+            return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult EditProduct(int id, string name, decimal price, string description, string imageUrl)
+        {
+            return RedirectToAction("Products");
         }
 
         public IActionResult DeleteProduct(int id)
@@ -27,7 +65,7 @@ namespace OnlineShopWebApp.Controllers
                 _productsStorage.Remove(product);
             }
 
-            return RedirectToAction("Index", new { Item = AdminMenuItems.Products });
+            return RedirectToAction("Products");
         }
     }
 }

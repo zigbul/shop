@@ -5,6 +5,7 @@
         Orders,
         Users,
         Roles,
-        Products
+        Products,
+        ProductDetails
     }
 }

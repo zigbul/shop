@@ -1,7 +1,5 @@
 using System.Diagnostics;
-using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 using shop.Models;
 
