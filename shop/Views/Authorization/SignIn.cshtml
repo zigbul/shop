@@ -1,0 +1,44 @@
+﻿@using OnlineShopWebApp.Models
+
+@model Auth
+
+<form method="post"
+      class="text-center">
+
+    <h3>Вход</h3>
+
+    <div>
+        <label asp-for="Login">Логин</label><br />
+        <input type="text" asp-for="Login" placeholder="Введите логин" /><br />
+        <span class="text-danger" asp-validation-for="Login"></span>
+    </div>
+
+    <div>
+        <label asp-for="Password">Пароль</label><br />
+        <input type="password" asp-for="Password" placeholder="Введите пароль" /><br />
+        <span class="text-danger" asp-validation-for="Password"></span>
+    </div>
+
+    <div>
+        <label asp-for="IsRemembered">Запрмнить меня?</label>
+        <input type="checkbox" asp-for="IsRemembered" />
+    </div>
+
+    <div>
+        <button class="btn btn-dark"
+                type="submit"
+                asp-controller="Authorization"
+                asp-action="SignIn">
+            Войти
+        </button>
+    </div>
+
+    <div>
+        <a class="text-decoration-none text-black"
+           asp-controller="Registration"
+           asp-action="SignUp">
+            Регистрация нового пользователя
+        </a>
+    </div>
+
+</form>

@@ -1,18 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class AuthorizationController : Controller
     {
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult SignIn()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult SignIn(string login, string password, bool isRemembered)
+        public IActionResult SignIn(Auth auth)
         {
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(auth);
         }
     }
 }
