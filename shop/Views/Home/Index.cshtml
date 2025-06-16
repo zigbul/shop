@@ -7,8 +7,13 @@
 }
 
 <div class="text-center">
-    <ul class="row">
+    <form method="get" class="mb-3">
+        <input type="text" placeholder="Поиск" name="searchName" value="@ViewBag.SearchName" />
+        <button type="submit" asp-controller="Home" asp-action="Index">Найти</button>
+        <a class="btn" asp-controller="Home" asp-action="Index">Отмена</a>
+    </form>
 
+    <ul class="row">
         @foreach (var product in Model)
         {
             <li class="col-3 card shadow">
@@ -22,6 +27,5 @@
                 </div>
             </li>
         }
-
     </ul>
 </div>

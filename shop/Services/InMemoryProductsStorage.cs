@@ -1,4 +1,5 @@
-﻿using OnlineShopWebApp.Models;
+﻿using AspNetCoreGeneratedDocument;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Services
 {
