@@ -7,21 +7,25 @@
 }
 
 <div class="text-center">
-    <ul class="row">
+    <form method="get" class="mb-3">
+        <input type="text" placeholder="Поиск" name="searchName" value="@ViewBag.SearchName" />
+        <button type="submit" asp-controller="Home" asp-action="Index">Найти</button>
+        <a class="btn" asp-controller="Home" asp-action="Index">Отмена</a>
+    </form>
 
+    <ul class="row">
         @foreach (var product in Model)
         {
             <li class="col-3 card shadow">
                 <div class="card-body">
-                    <img class="card-img-top" src="https://cdn.nur.kz/images/1120/86ae2ae56e309b71.jpeg" />
+                    <img class="card-img-top" width="100" height="250" src="@product.ImageUrl" />
                     <a style="color: black" href="/product/index/@product.Id">
                         <h5>@product.Name</h5>
                     </a>
-                    <p>Цена: @product.Cost руб.</p>
+                    <p>Цена: @product.Price руб.</p>
                     <a class="btn btn-success" href="/cart/add?productId=@product.Id" role="button">Добавить в корзину</a>
                 </div>
             </li>
         }
-
     </ul>
 </div>

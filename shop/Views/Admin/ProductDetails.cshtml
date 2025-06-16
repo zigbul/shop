@@ -1,0 +1,16 @@
+﻿@using OnlineShopWebApp.Models
+
+@model Product;
+
+<div class="d-flex justify-content-centers gap-2">
+    <div>
+        <img width="300" height="300" src="@Model.ImageUrl" />
+    </div>
+    <div>
+        <h3>Название: @Model.Name</h3>
+        <p>Цена: @Model.Price</p>
+        <p>Описание: @Model.Description</p>
+        <a asp-controller="Admin" asp-action="EditProduct" asp-route-id="@Model.Id">Редактировать</a>
+        <a asp-controller="Admin" asp-action="Products">Вернуться</a>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+﻿@using OnlineShopWebApp.Models
+
+@model Product
+
+<h2>Редактирование продукта</h2>
+<form method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <div>
+        Название: <input type="text" name="name" value="@Model.Name" />
+    </div>
+    <div>
+        Цена: <input type="text" name="price" value="@Model.Price" />
+    </div>
+    <div>
+        Описание: <input type="text" name="description" value="@Model.Description" />
+    </div>
+    <div>
+        Ссылка на картинку: <input type="text" name="imageUrl" value="@Model.ImageUrl" />
+    </div>
+    <button class="btn"
+            type="submit"
+            asp-controller="Admin"
+            asp-action="EditProduct">
+        Сохранить
+    </button>
+    <a class="btn"
+       asp-controller="Admin"
+       asp-action="Products">
+        Назад
+    </a>
+</form>

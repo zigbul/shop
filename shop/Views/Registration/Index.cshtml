@@ -1,0 +1,13 @@
+﻿<form method="post"
+      class="d-flex flex-column align-items-center gap-2">
+    <h3>Вход</h3>
+    <input placeholder="Логин" name="login" type="text" />
+    <input placeholder="Пароль" name="password" type="password" />
+    <input placeholder="Подтвердите пароль" name="confirmPassword" type="password" />
+    <button class="btn btn-dark"
+            type="submit"
+            asp-controller="Registration"
+            asp-action="SignUp">
+        Зарегистрироваться
+    </button>
+</form>

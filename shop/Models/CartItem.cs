@@ -8,7 +8,7 @@
 
         public int Amount { get; set; }
 
-        public decimal Cost => Amount * Product.Cost;
+        public decimal Cost => Amount * Product.Price;
 
         public CartItem(Product product)
         {
