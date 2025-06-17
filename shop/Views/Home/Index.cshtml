@@ -22,7 +22,7 @@
                     <a style="color: black" href="/product/index/@product.Id">
                         <h5>@product.Name</h5>
                     </a>
-                    <p>Цена: @product.Price руб.</p>
+                    <p>Цена: @product.Price.ToString("0.00") руб.</p>
                     <a class="btn btn-success" href="/cart/add?productId=@product.Id" role="button">Добавить в корзину</a>
                 </div>
             </li>

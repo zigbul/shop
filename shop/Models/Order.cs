@@ -30,21 +30,6 @@ namespace OnlineShopWebApp.Models
 
         public OrderStatuses Status { get; set; }
 
-        public string TranslatedStatus
-        {
-            get {
-                switch (Status)
-                {
-                    case OrderStatuses.Created: return "Создан";
-                    case OrderStatuses.Proccessing: return "В обработке";
-                    case OrderStatuses.Shipped: return "Отправлен";
-                    case OrderStatuses.Cancelled: return "Отменён";
-                    case OrderStatuses.Delivered: return "Доставлен";
-                    default: return "Неизвестно";
-                }
-            }
-        } 
-
         public DateTime Date { get; set; }
 
         public Order()

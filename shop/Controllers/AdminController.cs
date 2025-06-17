@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Models.Enums;
 using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Controllers
@@ -22,9 +23,23 @@ namespace OnlineShopWebApp.Controllers
             return View(orders);
         }
 
-        public IActionResult Order(int id)
+        [HttpGet]
+        public IActionResult OrderDetails(int id)
         {
             var order = _ordersStorage.TryGetById(id);
+
+            return View(order);
+        }
+
+        [HttpPost]
+        public IActionResult OrderDetails(int id, OrderStatuses status)
+        {
+            var order = _ordersStorage.TryGetById(id);
+
+            if (order != null)
+            {
+                order.Status = status;
+            }
 
             return View(order);
         }
