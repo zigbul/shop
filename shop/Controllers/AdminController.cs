@@ -64,11 +64,22 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddProduct(string name, decimal price, string description, string imageUrl)
+        public IActionResult AddProduct(Product product)
         {
-            _productsStorage.Add(new Product(name, price, description, imageUrl));
+            if (product.Price == 0)
+            {
+                ModelState["Price"].Errors.Clear();
+                ModelState.AddModelError("Price", "Введите цену");
+            }
 
-            return RedirectToAction("Products");
+            if (ModelState.IsValid)
+            {
+                _productsStorage.Add(product);
+
+                return RedirectToAction("Products");
+            }
+            
+            return View(product);
         }
 
         public IActionResult DeleteProduct(int id)

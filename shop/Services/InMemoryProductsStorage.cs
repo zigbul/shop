@@ -1,5 +1,6 @@
 ﻿using AspNetCoreGeneratedDocument;
 using OnlineShopWebApp.Models;
+using System.Xml.Linq;
 
 namespace OnlineShopWebApp.Services
 {
@@ -7,11 +8,39 @@ namespace OnlineShopWebApp.Services
     {
         private List<Product> _products = new List<Product>()
         {
-            new Product("Хлеб", 55, "Свежий, душистый каравай — основа крестьянского рациона. Скромный, но спасает от голода.", "/images/bread.png"),
-            new Product("Сыр", 125, "Выдержанный, ароматный ломоть — пища аристократов и мышей. Дарует силу и удовольствие.", "/images/cheese.png"),
-            new Product("Молоко", 78, "Свежее, парящее молоко — источник жизни и магической силы. Пейте, смертные!", "/images/milk.png"),
-            new Product("Яйцо", 109, "Символ жизни, смерти на сковородке и возрождения в салате.", "/images/egg.png"),
-            new Product("Шоколад", 250, "Тёмная алхимия какао-бобов, растопляющая сердца и волю. Запретный плод сладкоежек.", "/images/chocolate.png")
+            new Product()
+            { 
+                Name = "Хлеб",
+                Price = 55,
+                Description = "Свежий, душистый каравай — основа крестьянского рациона. Скромный, но спасает от голода.",
+                ImageUrl = "/images/bread.png"
+            },
+            new Product()
+            {
+                Name = "Сыр",
+                Price = 125,
+                Description = "Выдержанный, ароматный ломоть — пища аристократов и мышей. Дарует силу и удовольствие.",
+                ImageUrl = "/images/cheese.png"
+            },
+            new Product()
+                        {
+                Name = "Молоко",
+                Price = 78,
+                Description = "Свежее, парящее молоко — источник жизни и магической силы. Пейте, смертные!",
+                ImageUrl = "/images/milk.png"
+            },
+              new Product()                      {
+                Name = "Яйцо",
+                Price = 109,
+                Description = "Символ жизни, смерти на сковородке и возрождения в салате.",
+                ImageUrl = "/images/egg.png"
+            },
+               new Product()                                 {
+                Name = "Шоколад",
+                Price = 250,
+                Description = "Тёмная алхимия какао-бобов, растопляющая сердца и волю. Запретный плод сладкоежек.",
+                ImageUrl = "/images/chocolate.png"
+            }
         };
 
         public List<Product> GetAll()
