@@ -3,26 +3,41 @@
 @model Product
 
 <h2>Редактирование продукта</h2>
+
 <form method="post">
-    <input type="hidden" name="id" value="@Model.Id" />
+    <input asp-for="Id" type="hidden" value="@Model.Id" />
+
     <div>
-        Название: <input type="text" name="name" value="@Model.Name" />
+        <label asp-for="Name">Название</label><br />
+        <input asp-for="Name" value="@Model.Name" />
+        <span class="text-danger" asp-validation-for="Name"></span>
     </div>
+
     <div>
-        Цена: <input type="text" name="price" value="@Model.Price" />
+        <label asp-for="Price">Цена</label><br />
+        <input asp-for="Price" type="number" value="@Model.Price" />
+        <span class="text-danger" asp-validation-for="Price"></span>
     </div>
+
     <div>
-        Описание: <input type="text" name="description" value="@Model.Description" />
+        <label asp-for="Description">Описание</label><br />
+        <input asp-for="Description" value="@Model.Description" />
+        <span class="text-danger" asp-validation-for="Description"></span>
     </div>
+
     <div>
-        Ссылка на картинку: <input type="text" name="imageUrl" value="@Model.ImageUrl" />
+        <label asp-for="ImageUrl">Ссылка на фото</label><br />
+        <input asp-for="ImageUrl" value="@Model.ImageUrl" />
+        <span class="text-danger" asp-validation-for="ImageUrl"></span>
     </div>
+
     <button class="btn"
             type="submit"
             asp-controller="Admin"
             asp-action="EditProduct">
         Сохранить
     </button>
+
     <a class="btn"
        asp-controller="Admin"
        asp-action="Products">

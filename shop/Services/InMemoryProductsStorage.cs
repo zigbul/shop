@@ -53,16 +53,16 @@ namespace OnlineShopWebApp.Services
             _products.Remove(product);
         }
 
-        public void Update(int id, string name, decimal price, string description, string imageUrl)
+        public void Update(Product editedProduct)
         {
-            var product = _products.FirstOrDefault(p => p.Id == id);
+            var product = _products.FirstOrDefault(p => p.Id == editedProduct.Id);
 
             if (product != null)
             {
-                product.Name = name;
-                product.Price = price;
-                product.Description = description;
-                product.ImageUrl = imageUrl;
+                product.Name = editedProduct.Name;
+                product.Price = editedProduct.Price;
+                product.Description = editedProduct.Description;
+                product.ImageUrl = editedProduct.ImageUrl;
             }
         }
 
