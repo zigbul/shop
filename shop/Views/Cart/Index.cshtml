@@ -1,6 +1,6 @@
 ﻿@using OnlineShopWebApp.Models
 
-@model Cart;
+@model Cart
 
 @if (Model == null || Model.Items.Count == 0)
 {
@@ -32,7 +32,6 @@ else
                             <td>
                                 <a 
                                     class="btn btn-light" 
-                                    type="submit"
                                     asp-controller="Cart"
                                     asp-action="Add"
                                     asp-route-productId="@item.Product.Id"
@@ -43,7 +42,6 @@ else
                             <td>
                                 <a 
                                     class="btn btn-light" 
-                                    type="button"
                                     asp-controller="Cart"
                                     asp-action="Remove"
                                     asp-route-itemId="@item.Id"
