@@ -1,31 +1,39 @@
-﻿<div class="d-flex justify-content-center">
-    <form method="post" class="d-flex flex-column gap-1">
-        <label class="fw-bold" for="name">
-            Имя
-        </label>
-        <input type="text" placeholder="Ваше имя..." name="name" />
-        <label class="fw-bold" for="address">
-            Адрес
-        </label>
-        <input type="text" placeholder="Ваш адрec..." name="address"/>
-        <label class="fw-bold" for="email">
-            Почта
-        </label>
-        <input type="email" placeholder="Ваша почта..." name="email" />
-        <label class="fw-bold" for="tel">
-            Номер телефона
-        </label>
-        <input type="tel" placeholder="Ваш тел..." name="phone" />
-        <button 
-            class="btn btn-success" 
-            type="submit" 
-            asp-controller="Order" 
-            asp-action="Buy"
-        >
-            Оформить
-        </button>
-    </form>
-</div>
+﻿@using OnlineShopWebApp.Models
+
+@model Order
+
+<form method="post" class="text-center">
+    <div>
+        <label asp-for="Name">Имя</label><br />
+        <input type="text" asp-for="Name" placeholder="Введите имя" /><br />
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </div>
+
+    <div>
+        <label asp-for="Address">Адрес</label><br />
+        <input type="text" asp-for="Address" placeholder="Введите адрес" /><br />
+        <span class="text-danger" asp-validation-for="Address"></span>
+    </div>
+
+    <div>
+        <label asp-for="Email">Почта</label><br />
+        <input type="email" asp-for="Email" placeholder="Введите email" /><br />
+        <span class="text-danger" asp-validation-for="Email"></span>
+    </div>
+
+    <div>
+        <label asp-for="Phone">Телефон</label><br />
+        <input type="tel" asp-for="Phone" placeholder="Введите номер телефона" /><br />
+        <span class="text-danger" asp-validation-for="Phone"></span>
+    </div>
+
+    <button class="btn btn-success"
+            type="submit"
+            asp-controller="Order"
+            asp-action="Index">
+        Оформить
+    </button>
+</form>
 
 
 

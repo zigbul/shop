@@ -23,7 +23,7 @@
                     <tr>
                         <th>Id</th>
                         <th>Название</th>
-                        <th>Цена</th>
+                        <th>Цена, руб</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -40,7 +40,7 @@
                                     @product.Name
                                 </a>
                             </td>
-                            <td>@product.Price</td>
+                            <td>@($"{product.Price:0.00}")</td>
                             <td>
                                 <a class="btn"
                                    asp-controller="Admin"

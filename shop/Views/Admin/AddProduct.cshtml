@@ -2,29 +2,49 @@
 
 @model Product
 
-<h2>Новый продукт</h2>
-<form method="post">
-    <div>
-        Название: <input type="text" name="name" placeholder="Название товара"/>
+<div class="row">
+    <nav class="col-3">
+        @await Html.PartialAsync("AdminNav")
+    </nav>
+    <div class="col-9">
+
+        <h2>Новый продукт</h2>
+        <form method="post">
+            <div>
+                <label asp-for="Name">Название</label><br />
+                <input asp-for="Name" placeholder="Название товара" /><br />
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+
+            <div>
+                <label asp-for="Price">Цена</label><br />
+                <input asp-for="Price" type="number" step="0.01" placeholder="Цена" /><br />
+                <span class="text-danger" asp-validation-for="Price"></span>
+            </div>
+
+            <div>
+                <label asp-for="Description">Описание товара</label><br />
+                <input asp-for="Description" placeholder="Описание товара" /><br />
+                <span class="text-danger" asp-validation-for="Description"></span>
+            </div>
+
+            <div>
+                <label asp-for="ImageUrl">Ссылка на картинку</label><br />
+                <input asp-for="ImageUrl" placeholder="Ссылка на картинку" /><br />
+                <span class="text-danger" asp-validation-for="ImageUrl"></span>
+            </div>
+
+            <button class="btn"
+                    type="submit"
+                    asp-controller="Admin"
+                    asp-action="AddProduct">
+                Сохранить
+            </button>
+            <a class="btn"
+               asp-controller="Admin"
+               asp-action="Products">
+                Назад
+            </a>
+        </form>
     </div>
-    <div>
-        Цена: <input type="text" name="price" placeholder="Цена товара" />
-    </div>
-    <div>
-        Описание: <input type="text" name="description" placeholder="Описание товара" />
-    </div>
-    <div>
-        Ссылка на картинку: <input type="text" name="imageUrl" placeholder="Ссылка на картинку" />
-    </div>
-    <button class="btn"
-            type="submit"
-            asp-controller="Admin"
-            asp-action="AddProduct">
-        Сохранить
-    </button>
-    <a class="btn"
-       asp-controller="Admin"
-       asp-action="Products">
-        Назад
-    </a>
-</form>
+</div>

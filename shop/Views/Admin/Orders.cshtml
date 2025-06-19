@@ -1,12 +1,40 @@
-﻿@using OnlineShopWebApp.Properties
+﻿@using OnlineShopWebApp.Models
+@using OnlineShopWebApp.Properties
 
-@model AdminMenuItems
+@model List<Order>
 
 <div class="row">
     <nav class="col-3">
         @await Html.PartialAsync("AdminNav")
     </nav>
+
     <div class="col-9">
         <h2>Список заказов</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Номер</th>
+                    <th>Сумма</th>
+                    <th>Статус</th>
+                    <th>Email</th>
+                    <th>Дата</th>
+                    <th>Время</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td><a asp-controller="Admin" asp-action="OrderDetails" asp-route-id="@order.Id">@order.Id</a></td>
+                        <td>@order.Cart?.Cost.ToString("0.00") ₽</td>
+                        <td>@OrdersStatusHelper.Statuses[order.Status]</td>
+                        <td>@order.Email</td>
+                        <td>@order.Date.ToShortDateString()</td>
+                        <td>@order.Date.ToShortTimeString()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>

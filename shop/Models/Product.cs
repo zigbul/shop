@@ -1,4 +1,6 @@
-﻿namespace OnlineShopWebApp.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OnlineShopWebApp.Models
 {
     public class Product
     {
@@ -6,22 +8,22 @@
 
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        [Required(ErrorMessage = "Введите название продукта")]
+        public required string Name { get; set; }
 
+        [Required(ErrorMessage = "Введите цену продукта")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Цена не может быть отрицательной")]
         public decimal Price { get; set; }
 
-        public string Description { get; set; }
+        [Required(ErrorMessage = "Добавьте описание продукта")]
+        public required string Description { get; set; }
 
-        public string ImageUrl { get; set; }
+        [Required(ErrorMessage = "Добавьте ссылку на фото продукта")]
+        public required string ImageUrl { get; set; }
 
-        public Product(string name, decimal price, string description, string imgUrl)
+        public Product()
         {
             Id = _idCounter;
-            Name = name;
-            Price = price;
-            Description = description;
-            ImageUrl = imgUrl;
-
             _idCounter++;
         }
 

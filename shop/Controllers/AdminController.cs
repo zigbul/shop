@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Models.Enums;
 using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Controllers
@@ -7,15 +8,40 @@ namespace OnlineShopWebApp.Controllers
     public class AdminController : Controller
     {
         private readonly IProductsStorage _productsStorage;
+        private readonly IOrdersStorage _ordersStorage;
 
-        public AdminController(IProductsStorage productsStorage)
+        public AdminController(IProductsStorage productsStorage, IOrdersStorage ordersStorage)
         {
             _productsStorage = productsStorage;
+            _ordersStorage = ordersStorage;
         }
 
         public IActionResult Orders()
         {
-            return View();
+            var orders = _ordersStorage.GetAll();
+
+            return View(orders);
+        }
+
+        [HttpGet]
+        public IActionResult OrderDetails(int id)
+        {
+            var order = _ordersStorage.TryGetById(id);
+
+            return View(order);
+        }
+
+        [HttpPost]
+        public IActionResult OrderDetails(int id, OrderStatuses status)
+        {
+            var order = _ordersStorage.TryGetById(id);
+
+            if (order != null)
+            {
+                order.Status = status;
+            }
+
+            return View(order);
         }
 
         public IActionResult Users()
@@ -51,9 +77,9 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditProduct(int id, string name, decimal price, string description, string imageUrl)
+        public IActionResult EditProduct(Product product)
         {
-            _productsStorage.Update(id, name, price, description, imageUrl);
+            _productsStorage.Update(product);
             return RedirectToAction("Products");
         }
 
@@ -64,11 +90,22 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddProduct(string name, decimal price, string description, string imageUrl)
+        public IActionResult AddProduct(Product product)
         {
-            _productsStorage.Add(new Product(name, price, description, imageUrl));
+            if (product.Price == 0)
+            {
+                ModelState["Price"].Errors.Clear();
+                ModelState.AddModelError("Price", "Введите цену");
+            }
 
-            return RedirectToAction("Products");
+            if (ModelState.IsValid)
+            {
+                _productsStorage.Add(product);
+
+                return RedirectToAction("Products");
+            }
+            
+            return View(product);
         }
 
         public IActionResult DeleteProduct(int id)

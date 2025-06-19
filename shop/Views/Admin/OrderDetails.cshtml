@@ -1,0 +1,62 @@
+﻿@using OnlineShopWebApp.Models
+@using OnlineShopWebApp.Models.Enums
+@using OnlineShopWebApp.Properties
+
+@model Order
+
+<div class="row">
+    <nav class="col-3">
+        @await Html.PartialAsync("AdminNav")
+    </nav>
+
+    <div class="col-6">
+        <h2>Заказ № @Model.Id</h2>
+
+        <table class="table">
+            <tr>
+                <td>Дата и время оформления:</td>
+                <td>@Model.Date.ToShortDateString() в @Model.Date.ToShortTimeString()</td>
+            </tr>
+            <tr>
+                <td>Адрес доставки:</td>
+                <td>@Model.Address</td>
+            </tr>
+            <tr>
+                <td>Получатель:</td>
+                <td>@Model.Name.ToUpper()</td>
+            </tr>
+            <tr>
+                <td>Телефон:</td>
+                <td>@Model.Phone</td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td>@Model.Email</td>
+            </tr>
+            <tr>
+                <td>Сумма заказа:</td>
+                <td>@Model.Cart?.Cost.ToString("0.00") ₽</td>
+            </tr>
+            <tr>
+                <td>Статус заказа:</td>
+                <td>
+                    <form method="post" id="changeStatusForm" asp-controller="Admin" asp-action="OrderDetails">
+                        <select name="status" class="form-control">
+                            @foreach (var status in OrdersStatusHelper.Statuses)
+                            {
+                                <option value="@status.Key" selected="@(Model.Status == status.Key)">
+                                    @status.Value
+                                </option>
+                            }
+                        </select>
+
+                        <input type="hidden" name="Id" value="@Model.Id" />
+                    </form>
+                </td>
+            </tr>
+        </table>
+
+        <a asp-controller="Admin" asp-action="Orders">Вернуться к заказам</a>
+        <button type="submit" form="changeStatusForm">Изменить статус</button>
+    </div>
+</div>
