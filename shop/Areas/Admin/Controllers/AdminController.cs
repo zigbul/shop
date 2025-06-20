@@ -3,8 +3,9 @@ using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Models.Enums;
 using OnlineShopWebApp.Services;
 
-namespace OnlineShopWebApp.Controllers
+namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class AdminController : Controller
     {
         private readonly IProductsStorage _productsStorage;
