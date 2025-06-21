@@ -10,11 +10,13 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     {
         private readonly IProductsStorage _productsStorage;
         private readonly IOrdersStorage _ordersStorage;
+        private readonly IRolesStorage _rolesStorage;
 
-        public AdminController(IProductsStorage productsStorage, IOrdersStorage ordersStorage)
+        public AdminController(IProductsStorage productsStorage, IOrdersStorage ordersStorage, IRolesStorage rolesStorage)
         {
             _productsStorage = productsStorage;
             _ordersStorage = ordersStorage;
+            _rolesStorage = rolesStorage;
         }
 
         public IActionResult Orders()
@@ -52,7 +54,47 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult Roles()
         {
+            var roles = _rolesStorage.GetAll();
+
+            return View(roles);
+        }
+
+        public IActionResult RemoveRole(string name)
+        {
+            var role = _rolesStorage.TryGetByName(name);
+
+            if (role != null)
+            {
+                _rolesStorage.Remove(role);
+            }
+
+            return RedirectToAction("Roles");
+        }
+
+        [HttpGet]
+        public IActionResult AddRole()
+        {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddRole(Role role)
+        {
+            var existing = _rolesStorage.TryGetByName(role.Name);
+
+            if (existing != null)
+            {
+                ModelState.AddModelError("", "Такая роль уже существует");
+            }
+
+            if (ModelState.IsValid)
+            {
+                _rolesStorage.Add(role);
+
+                return RedirectToAction("Roles");
+            }
+
+            return View(role);
         }
 
         public IActionResult Products()
