@@ -6,6 +6,7 @@ builder.Services.AddSingleton<IProductsStorage, InMemoryProductsStorage>();
 builder.Services.AddSingleton<ICartsStorage, InMemoryCartsStorage>();
 builder.Services.AddSingleton<IOrdersStorage, InMemoryOrdersStorage>();
 builder.Services.AddSingleton<IRolesStorage, InMemoryRolesStorage>();
+builder.Services.AddSingleton<IUsersStorage, InMemoryUsersStorage>();
 
 builder.Services.AddControllersWithViews();
 
