@@ -6,7 +6,7 @@ namespace OnlineShopWebApp.Services
     {
         List<Role> GetAll();
 
-        Role? GetByName(string name);
+        Role? TryGetByName(string name);
 
         void Remove(Role role);
 

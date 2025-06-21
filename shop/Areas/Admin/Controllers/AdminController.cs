@@ -61,7 +61,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult RemoveRole(string name)
         {
-            var role = _rolesStorage.GetByName(name);
+            var role = _rolesStorage.TryGetByName(name);
 
             if (role != null)
             {
@@ -69,6 +69,32 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             }
 
             return RedirectToAction("Roles");
+        }
+
+        [HttpGet]
+        public IActionResult AddRole()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddRole(Role role)
+        {
+            var existing = _rolesStorage.TryGetByName(role.Name);
+
+            if (existing != null)
+            {
+                ModelState.AddModelError("", "Такая роль уже существует");
+            }
+
+            if (ModelState.IsValid)
+            {
+                _rolesStorage.Add(role);
+
+                return RedirectToAction("Roles");
+            }
+
+            return View(role);
         }
 
         public IActionResult Products()

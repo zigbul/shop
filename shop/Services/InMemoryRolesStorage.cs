@@ -19,7 +19,7 @@ namespace OnlineShopWebApp.Services
             return _roles;
         }
 
-        public Role? GetByName(string name)
+        public Role? TryGetByName(string name)
         {
             return _roles.FirstOrDefault(role => role.Name == name);
         }

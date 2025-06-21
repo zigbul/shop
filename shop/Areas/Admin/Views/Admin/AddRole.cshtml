@@ -1,0 +1,38 @@
+﻿@using OnlineShopWebApp.Models
+
+@model Role
+
+<div class="row">
+    <nav class="col-3">
+        @await Html.PartialAsync("AdminNav")
+    </nav>
+    <div class="col-9">
+
+        <h2>Новая роль</h2>
+
+        <div class="text-danger fw-bold" asp-validation-summary="ModelOnly"></div>
+
+        <form method="post">
+            <div>
+                <label asp-for="Name">Название</label><br />
+                <input asp-for="Name" placeholder="Название роли" /><br />
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+
+            <button class="btn"
+                    type="submit"
+                    asp-area="Admin"
+                    asp-controller="Admin"
+                    asp-action="AddRole">
+                Сохранить
+            </button>
+
+            <a class="btn"
+               asp-area="Admin"
+               asp-controller="Admin"
+               asp-action="Roles">
+                Назад
+            </a>
+        </form>
+    </div>
+</div>
