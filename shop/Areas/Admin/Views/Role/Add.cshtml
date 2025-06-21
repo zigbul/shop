@@ -12,27 +12,29 @@
 
         <div class="text-danger fw-bold" asp-validation-summary="ModelOnly"></div>
 
-        <form method="post">
+        <form class="d-flex flex-column gap-2" method="post">
             <div>
                 <label asp-for="Name">Название</label><br />
                 <input asp-for="Name" placeholder="Название роли" /><br />
                 <span class="text-danger" asp-validation-for="Name"></span>
             </div>
 
-            <button class="btn"
-                    type="submit"
-                    asp-area="Admin"
-                    asp-controller="Admin"
-                    asp-action="AddRole">
-                Сохранить
-            </button>
+            <div>
+                <button class="btn btn-success"
+                        type="submit"
+                        asp-area="Admin"
+                        asp-controller="Role"
+                        asp-action="Add">
+                    Сохранить
+                </button>
 
-            <a class="btn"
-               asp-area="Admin"
-               asp-controller="Admin"
-               asp-action="Roles">
-                Назад
-            </a>
+                <a class="btn btn-dark"
+                   asp-area="Admin"
+                   asp-controller="Home"
+                   asp-action="Roles">
+                    Назад
+                </a>
+            </div>
         </form>
     </div>
 </div>

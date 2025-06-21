@@ -15,8 +15,19 @@
                 <h3>Название: @Model.Name</h3>
                 <p>Цена: @Model.Price</p>
                 <p>Описание: @Model.Description</p>
-                <a asp-controller="Admin" asp-action="EditProduct" asp-route-id="@Model.Id">Редактировать</a>
-                <a asp-controller="Admin" asp-action="Products">Вернуться</a>
+
+                <a asp-area="Admin"
+                   asp-controller="Product"
+                   asp-action="Edit"
+                   asp-route-id="@Model.Id">
+                    Редактировать
+                </a>
+
+                <a asp-area="Admin"
+                   asp-controller="Home"
+                   asp-action="Products">
+                    Вернуться
+                </a>
             </div>
         </div>
     </div>

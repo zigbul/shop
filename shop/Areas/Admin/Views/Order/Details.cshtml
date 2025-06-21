@@ -40,7 +40,7 @@
             <tr>
                 <td>Статус заказа:</td>
                 <td>
-                    <form method="post" id="changeStatusForm" asp-controller="Admin" asp-action="OrderDetails">
+                    <form method="post" id="changeStatusForm" asp-area="Admin" asp-controller="Order" asp-action="Details">
                         <select name="status" class="form-control">
                             @foreach (var status in OrdersStatusHelper.Statuses)
                             {
@@ -56,7 +56,7 @@
             </tr>
         </table>
 
-        <a asp-controller="Admin" asp-action="Orders">Вернуться к заказам</a>
+        <a asp-area="Admin" asp-controller="Home" asp-action="Orders">Вернуться к заказам</a>
         <button type="submit" form="changeStatusForm">Изменить статус</button>
     </div>
 </div>
