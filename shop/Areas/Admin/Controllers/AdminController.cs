@@ -59,6 +59,18 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View(roles);
         }
 
+        public IActionResult RemoveRole(string name)
+        {
+            var role = _rolesStorage.GetByName(name);
+
+            if (role != null)
+            {
+                _rolesStorage.Remove(role);
+            }
+
+            return RedirectToAction("Roles");
+        }
+
         public IActionResult Products()
         {
             var products = _productsStorage.GetAll();
