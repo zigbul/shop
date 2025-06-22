@@ -35,5 +35,10 @@ namespace OnlineShopWebApp.Services
         {
             return _users.FirstOrDefault(user => user.Password == auth.Password && user.Login == auth.Login);
         }
+
+        public User? GetById(Guid id)
+        {
+            return _users.FirstOrDefault(user => user.Id == id);
+        }
     }
 }

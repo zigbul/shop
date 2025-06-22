@@ -19,10 +19,17 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach(var user in Model)
+                @foreach (var user in Model)
                 {
                     <tr>
-                        <td>@user.Id</td>
+                        <td>
+                            <a asp-area="Admin"
+                               asp-controller="User"
+                               asp-action="Details"
+                               asp-route-id="@user.Id">
+                                @user.Id
+                            </a>
+                        </td>
                         <td>@user.Login</td>
                         <td>@user.Email</td>
                     </tr>
