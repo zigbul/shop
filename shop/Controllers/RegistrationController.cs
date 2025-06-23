@@ -22,14 +22,21 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult SignUp(User user)
         {
-            if (ModelState.IsValid)
-            {
-                _usersStorage.Add(user);
+            var existingUser = _usersStorage.Get(new Auth() { Login = user.Login, Password = user.Password });
 
-                return RedirectToAction("Index", "Home");
+            if (existingUser != null)
+            {
+                ModelState.AddModelError("", "Такой логин уже существует");
             }
 
-            return View(user);
+            if (ModelState.IsValid == false)
+            {
+                return View(user);
+            }
+
+            _usersStorage.Add(user);
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
