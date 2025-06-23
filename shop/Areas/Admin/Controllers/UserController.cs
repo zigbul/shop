@@ -108,5 +108,17 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
             return RedirectToAction("Details", new { userInfo.Id });
         }
+
+        public IActionResult Remove(Guid id)
+        {
+            var user = _usersStorage.GetById(id);
+
+            if (user != null)
+            {
+                _usersStorage.Remove(user);
+            }
+
+            return RedirectToAction("Users", "Home");
+        }
     }
 }
