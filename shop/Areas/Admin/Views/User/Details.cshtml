@@ -1,0 +1,86 @@
+﻿@using OnlineShopWebApp.Models
+@using OnlineShopWebApp.Models.Enums
+@using OnlineShopWebApp.Properties
+
+@model User
+
+<div class="row">
+    <nav class="col-3">
+        @await Html.PartialAsync("AdminNav")
+    </nav>
+
+    <div class="col-7">
+        <h4>Пользователь ID: @Model.Id</h4>
+
+        <table class="table">
+            <tr>
+                <td>Имя</td>
+                <td>@Model.FirstName</td>
+            </tr>
+            <tr>
+                <td>Фамилия</td>
+                <td>@Model.LastName</td>
+            </tr>
+            <tr>
+                <td>Логин</td>
+                <td>@Model.Login</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>@Model.Email</td>
+            </tr>
+            <tr>
+                <td>Телефон</td>
+                <td>@Model.Phone</td>
+            </tr>
+        </table>
+
+        <div class="d-flex gap-2">
+            <a class="btn btn-dark"
+               asp-area="Admin"
+               asp-controller="Home"
+               asp-action="Users">
+                Вернуться
+            </a>
+
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    Действия
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li>
+                        <a class="dropdown-item"
+                           asp-area="Admin"
+                           asp-controller="User"
+                           asp-action="ChangePassword"
+                           asp-route-id="@Model.Id">
+                            Смена пароля
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item"
+                           asp-area="Admin"
+                           asp-controller="User"
+                           asp-action="Edit"
+                           asp-route-id="@Model.Id">
+                            Редактирование данных
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item"
+                           asp-area="Admin"
+                           asp-controller="User"
+                           asp-action="Remove"
+                           asp-route-id="@Model.Id">
+                            Удалить пользователя
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

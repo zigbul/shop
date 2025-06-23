@@ -1,10 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class RegistrationController : Controller
     {
+        private readonly IUsersStorage _usersStorage;
+
+        public RegistrationController(IUsersStorage usersStorage)
+        {
+            _usersStorage = usersStorage;
+        }
+
         [HttpGet]
         public IActionResult SignUp()
         {
@@ -14,12 +22,21 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult SignUp(User user)
         {
-            if (ModelState.IsValid)
+            var existingUser = _usersStorage.Get(new Auth() { Login = user.Login, Password = user.Password });
+
+            if (existingUser != null)
             {
-                return RedirectToAction("Index", "Home");
+                ModelState.AddModelError("", "Такой логин уже существует");
             }
 
-            return View(user);
+            if (ModelState.IsValid == false)
+            {
+                return View(user);
+            }
+
+            _usersStorage.Add(user);
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

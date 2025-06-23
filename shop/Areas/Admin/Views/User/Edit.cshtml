@@ -1,0 +1,82 @@
+﻿@using OnlineShopWebApp.Models
+
+@model UserInfo
+
+<div class="row">
+    <nav class="col-3">
+        @await Html.PartialAsync("AdminNav")
+    </nav>
+
+    <div class="col-7">
+        <h2>Изменить данные</h2>
+
+        <form class="d-flex flex-column gap-2" method="post">
+            <div class="text-danger fw-bold" asp-validation-summary="All"></div>
+
+            <div>
+                <input type="hidden" asp-for="Id" value="@Model.Id" /><br />
+            </div>
+
+            <table class="table">
+                <tr>
+                    <td>
+                        <label asp-for="FirstName">Имя</label>
+                    </td>
+                    <td>
+                        <input asp-for="FirstName" value="@Model.FirstName" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="LastName">Фамилия</label>
+                    </td>
+                    <td>
+                        <input asp-for="LastName" value="@Model.LastName" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="Login">Логин</label>
+                    </td>
+                    <td>
+                        <input asp-for="Login" value="@Model.Login" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="Email">Email</label>
+                    </td>
+                    <td>
+                        <input asp-for="Email" value="@Model.Email" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="Phone">Телефон</label>
+                    </td>
+                    <td>
+                        <input asp-for="Phone" value="@Model.Phone" />
+                    </td>
+                </tr>
+            </table>
+
+            <div>
+                <button class="btn btn-success"
+                        type="submit"
+                        asp-area="Admin"
+                        asp-controller="User"
+                        asp-action="Edit">
+                    Сохранить
+                </button>
+
+                <a class="btn btn-dark"
+                   asp-area="Admin"
+                   asp-controller="User"
+                   asp-action="Details"
+                   asp-route-id="@Model.Id">
+                    Назад
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

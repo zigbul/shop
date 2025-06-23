@@ -1,4 +1,7 @@
-﻿@using OnlineShopWebApp.Properties
+﻿@using OnlineShopWebApp.Models
+@using OnlineShopWebApp.Properties
+
+@model List<User>
 
 <div class="row">
     <nav class="col-3">
@@ -6,5 +9,32 @@
     </nav>
     <div class="col-9">
         <h2>Список пользователей</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Логин</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>
+                            <a asp-area="Admin"
+                               asp-controller="User"
+                               asp-action="Details"
+                               asp-route-id="@user.Id">
+                                @user.Id
+                            </a>
+                        </td>
+                        <td>@user.Login</td>
+                        <td>@user.Email</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>

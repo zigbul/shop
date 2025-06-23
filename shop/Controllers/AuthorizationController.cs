@@ -1,10 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class AuthorizationController : Controller
     {
+        private readonly IUsersStorage _usersStorage;
+
+        public AuthorizationController(IUsersStorage usersStorage)
+        {
+            _usersStorage = usersStorage;
+        }
+
         [HttpGet]
         public IActionResult SignIn()
         {
@@ -14,12 +22,19 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult SignIn(Auth auth)
         {
-            if (ModelState.IsValid)
+            var user = _usersStorage.Get(auth);
+
+            if (user == null)
             {
-                return RedirectToAction("Index", "Home");
+                ModelState.AddModelError("", "Вы ввели неверные данные");
             }
 
-            return View(auth);
+            if (ModelState.IsValid == false)
+            {
+                return View(auth);
+            }
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -9,12 +9,20 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         private readonly IProductsStorage _productsStorage;
         private readonly IOrdersStorage _ordersStorage;
         private readonly IRolesStorage _rolesStorage;
+        private readonly IUsersStorage _usersStorage;
 
-        public HomeController(IProductsStorage productsStorage, IOrdersStorage ordersStorage, IRolesStorage rolesStorage)
+        public HomeController
+        (
+            IProductsStorage productsStorage,
+            IOrdersStorage ordersStorage,
+            IRolesStorage rolesStorage,
+            IUsersStorage usersStorage
+        )
         {
             _productsStorage = productsStorage;
             _ordersStorage = ordersStorage;
             _rolesStorage = rolesStorage;
+            _usersStorage = usersStorage;
         }
 
         public IActionResult Orders()
@@ -26,7 +34,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult Users()
         {
-            return View();
+            var users = _usersStorage.GetAll();
+
+            return View(users);
         }
 
         public IActionResult Roles()
