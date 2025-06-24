@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
+using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
@@ -48,7 +50,22 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult Products()
         {
-            var products = _productsStorage.GetAll();
+            var productsDb = _productsStorage.GetAll();
+            var products = new List<ProductViewModel>();
+
+            foreach (var productDb in productsDb)
+            {
+                var product = new ProductViewModel
+                {
+                    Id = productDb.Id,
+                    Name = productDb.Name,
+                    Price = productDb.Price,
+                    Description = productDb.Description,
+                    ImageUrl = productDb.ImageUrl,
+                };
+
+                products.Add(product);
+            }
 
             return View(products);
         }

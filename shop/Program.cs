@@ -1,8 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using OnlineShop.Db;
 using OnlineShopWebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<IProductsStorage, InMemoryProductsStorage>();
+builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("OnlineShop")));
+
+builder.Services.AddTransient<IProductsStorage, DbProductsStorage>();
 builder.Services.AddSingleton<ICartsStorage, InMemoryCartsStorage>();
 builder.Services.AddSingleton<IOrdersStorage, InMemoryOrdersStorage>();
 builder.Services.AddSingleton<IRolesStorage, InMemoryRolesStorage>();

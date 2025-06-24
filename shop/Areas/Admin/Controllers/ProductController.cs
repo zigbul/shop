@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models;
-using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -14,39 +15,62 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             _productsStorage = productsStorage;
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Details(Guid id)
         {
-            var product = _productsStorage.TryGetById(id);
+            var productDb = _productsStorage.TryGetById(id);
+            var product = new ProductViewModel
+            {
+                Id = productDb.Id,
+                Name = productDb.Name,
+                Price = productDb.Price,
+                Description = productDb.Description,
+                ImageUrl = productDb.ImageUrl,
+            };
 
             return View(product);
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(Guid id)
         {
-            var product = _productsStorage.TryGetById(id);
+            var productDb = _productsStorage.TryGetById(id);
+            var product = new ProductViewModel
+            {
+                Id = productDb.Id,
+                Name = productDb.Name,
+                Price = productDb.Price,
+                Description = productDb.Description,
+                ImageUrl = productDb.ImageUrl,
+            };
 
             return View(product);
         }
 
         [HttpPost]
-        public IActionResult Edit(Product product)
+        public IActionResult Edit(ProductViewModel product)
         {
-
             if (product.Price == 0)
             {
                 ModelState["Price"]?.Errors.Clear();
                 ModelState.AddModelError("Price", "Введите цену");
             }
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid == false)
             {
-                _productsStorage.Update(product);
-
-                return RedirectToAction("Products", "Home");
+                return View(product);
             }
 
-            return View(product);
+            var productDb = new Product
+            {
+                Name = product.Name,
+                Price = product.Price,
+                Description = product.Description,
+                ImageUrl = product.ImageUrl
+            };
+
+            _productsStorage.Update(productDb);
+
+            return RedirectToAction("Products", "Home");
         }
 
         [HttpGet]
@@ -56,7 +80,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Product product)
+        public IActionResult Add(ProductViewModel product)
         {
             if (product.Price == 0)
             {
@@ -64,17 +88,25 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 ModelState.AddModelError("Price", "Введите цену");
             }
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid == false)
             {
-                _productsStorage.Add(product);
-
-                return RedirectToAction("Products", "Home");
+                return View(product);
             }
-            
-            return View(product);
+
+            var productDb = new Product
+            {
+                Name = product.Name,
+                Price = product.Price,
+                Description = product.Description,
+                ImageUrl = product.ImageUrl
+            };
+
+            _productsStorage.Add(productDb);
+
+            return RedirectToAction("Products", "Home");
         }
 
-        public IActionResult Remove(int id)
+        public IActionResult Remove(Guid id)
         {
             var product = _productsStorage.TryGetById(id);
 

@@ -1,6 +1,6 @@
-﻿using OnlineShopWebApp.Models;
+﻿using OnlineShop.Db.Models;
 
-namespace OnlineShopWebApp.Services
+namespace OnlineShop.Db
 {
     public interface IProductsStorage
     {
@@ -12,6 +12,6 @@ namespace OnlineShopWebApp.Services
 
         public void Add(Product product);
 
-        public Product? TryGetById(int id);
+        public Product? TryGetById(Guid id);
     }
 }

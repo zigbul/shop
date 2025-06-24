@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Models;
-using OnlineShopWebApp.Services;
 using shop.Models;
 using System.Diagnostics;
-using System.Xml.Linq;
+using OnlineShop.Db;
+using OnlineShopWebApp.Models;
 
 namespace shop.Controllers
 {
@@ -18,7 +17,22 @@ namespace shop.Controllers
 
         public IActionResult Index(string? searchName = null)
         {
-            var products = _productsStorage.GetAll();
+            var productsDb = _productsStorage.GetAll();
+            var products = new List<ProductViewModel>();
+
+            foreach (var productDb in productsDb) 
+            {
+                var product = new ProductViewModel
+                {
+                    Id = productDb.Id,
+                    Name = productDb.Name,
+                    Price = productDb.Price,
+                    Description = productDb.Description,
+                    ImageUrl = productDb.ImageUrl,
+                };
+
+                products.Add(product);
+            }
 
             if (string.IsNullOrEmpty(searchName) == false || string.IsNullOrWhiteSpace(searchName) == false)
             {

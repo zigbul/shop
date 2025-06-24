@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Services;
+using OnlineShop.Db;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -21,7 +22,7 @@ namespace OnlineShopWebApp.Controllers
             return View(cart);
         }
 
-        public IActionResult Add(int productId, string userId = "1")
+        public IActionResult Add(Guid productId, string userId = "1")
         {
             var product = _productsStorage.TryGetById(productId);
             _cartsStorage.IncreaseItemAmount(product, userId);

@@ -2,11 +2,9 @@
 
 namespace OnlineShopWebApp.Models
 {
-    public class Product
+    public class ProductViewModel
     {
-        private static int _idCounter = 0;
-
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Введите название продукта")]
         public required string Name { get; set; }
@@ -20,16 +18,5 @@ namespace OnlineShopWebApp.Models
 
         [Required(ErrorMessage = "Добавьте ссылку на фото продукта")]
         public required string ImageUrl { get; set; }
-
-        public Product()
-        {
-            Id = _idCounter;
-            _idCounter++;
-        }
-
-        public override string ToString()
-        {
-            return $"Id: {Id}\nName: {Name}\nCost: {Price}\nDescription: {Description}";
-        }
     }
 }

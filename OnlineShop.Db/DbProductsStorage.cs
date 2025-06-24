@@ -1,12 +1,17 @@
-﻿using AspNetCoreGeneratedDocument;
-using OnlineShopWebApp.Models;
-using System.Xml.Linq;
+﻿using OnlineShop.Db.Models;
 
-namespace OnlineShopWebApp.Services
+namespace OnlineShop.Db
 {
-    public class InMemoryProductsStorage : IProductsStorage
+    public class DbProductsStorage : IProductsStorage
     {
-        private List<Product> _products = new List<Product>()
+        private readonly DatabaseContext _dbContext;
+
+        public DbProductsStorage(DatabaseContext databaseContext)
+        {
+            _dbContext = databaseContext;
+        }
+
+        /*private List<Product> _products = new List<Product>()
         {
             new Product()
             { 
@@ -41,21 +46,22 @@ namespace OnlineShopWebApp.Services
                 Description = "Тёмная алхимия какао-бобов, растопляющая сердца и волю. Запретный плод сладкоежек.",
                 ImageUrl = "/images/chocolate.png"
             }
-        };
+        };*/
 
         public List<Product> GetAll()
         {
-            return _products;
+            return _dbContext.Products.ToList();
         }
 
         public void Remove(Product product)
         {
-            _products.Remove(product);
+            _dbContext.Products.Remove(product);
+            _dbContext.SaveChanges();
         }
 
         public void Update(Product editedProduct)
         {
-            var product = _products.FirstOrDefault(p => p.Id == editedProduct.Id);
+            var product = _dbContext.Products.FirstOrDefault(p => p.Id == editedProduct.Id);
 
             if (product != null)
             {
@@ -64,16 +70,19 @@ namespace OnlineShopWebApp.Services
                 product.Description = editedProduct.Description;
                 product.ImageUrl = editedProduct.ImageUrl;
             }
+
+            _dbContext.SaveChanges();
         }
 
         public void Add(Product product)
         {
-            _products.Add(product);
+            _dbContext.Products.Add(product);
+            _dbContext.SaveChanges();
         }
 
-        public Product? TryGetById(int id)
+        public Product? TryGetById(Guid id)
         {
-            return _products.FirstOrDefault(product => product.Id == id);
+            return _dbContext.Products.FirstOrDefault(product => product.Id == id);
         }
     }
 }
