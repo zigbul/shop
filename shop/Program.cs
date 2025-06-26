@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("OnlineShop")));
 
 builder.Services.AddTransient<IProductsStorage, DbProductsStorage>();
-builder.Services.AddSingleton<ICartsStorage, InMemoryCartsStorage>();
+builder.Services.AddTransient<ICartsStorage, DbCartsStorage>();
 builder.Services.AddSingleton<IOrdersStorage, InMemoryOrdersStorage>();
 builder.Services.AddSingleton<IRolesStorage, InMemoryRolesStorage>();
 builder.Services.AddSingleton<IUsersStorage, InMemoryUsersStorage>();

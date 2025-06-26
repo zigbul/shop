@@ -1,6 +1,6 @@
 ﻿using OnlineShopWebApp.Models.Enums;
 
-namespace OnlineShopWebApp.Properties
+namespace OnlineShopWebApp.Properties.Helpers
 {
     public static class OrdersStatusHelper
     {

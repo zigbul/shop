@@ -1,31 +1,55 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Services;
 using OnlineShop.Db;
+using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Properties.Helpers;
+using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
-        private IProductsStorage _productsStorage;
-        private ICartsStorage _cartsStorage;
+        private readonly IProductsStorage _productsStorage;
+        private readonly ICartsStorage _cartsStorage;
+        private readonly IUsersStorage _usersStorage;
 
-        public CartController(IProductsStorage productsStorage, ICartsStorage cartsStorage) 
+        public CartController(IProductsStorage productsStorage, ICartsStorage cartsStorage, IUsersStorage usersStorage)
         {
             _productsStorage = productsStorage;
             _cartsStorage = cartsStorage;
+            _usersStorage = usersStorage;
         }
 
-        public IActionResult Index(string userId = "1")
+        public IActionResult Index()
         {
-            var cart = _cartsStorage.TryGetCardByUserId(userId);
+            var userId = Guid.Parse("5c18c843-52c5-455d-b44f-bec0913d047d");
+            var cartDb = _cartsStorage.TryGetCardByUserId(userId);
+
+            if (cartDb == null)
+            {
+                return View(cartDb);
+            }
+
+            var cart = new CartViewModel()
+            {
+                Id = cartDb.Id,
+                UserId = cartDb.UserId,
+                Items = MapperHelper.ToCartItemViewModel(cartDb.Items),
+            };
 
             return View(cart);
         }
 
-        public IActionResult Add(Guid productId, string userId = "1")
+        public IActionResult Add(Guid productId)
         {
+            var userId = Guid.Parse("5c18c843-52c5-455d-b44f-bec0913d047d");
             var product = _productsStorage.TryGetById(productId);
-            _cartsStorage.IncreaseItemAmount(product, userId);
+
+            if (product == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            _cartsStorage.IncreaseItemAmount(product);
 
             return RedirectToAction("Index");
         }

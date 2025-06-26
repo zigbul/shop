@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Properties.Helpers;
 using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Controllers
@@ -25,12 +27,13 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Index(Order order)
         {
-            order.Cart = _cartsStorage.TryGetCardByUserId("1");
+            var cartDb = _cartsStorage.TryGetCardByUserId(Guid.NewGuid());
+            order.Cart = MapperHelper.ToCartViewModel(cartDb);
 
             if (ModelState.IsValid && order.Cart != null)
             {
                 _ordersStorage.Add(order);
-                _cartsStorage.Remove(order.Cart);
+                _cartsStorage.Remove(cartDb);
 
                 ViewBag.IsVisible = true;
                 return RedirectToAction("Success");

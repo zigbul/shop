@@ -2,37 +2,26 @@ using Microsoft.AspNetCore.Mvc;
 using shop.Models;
 using System.Diagnostics;
 using OnlineShop.Db;
-using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Properties.Helpers;
+using OnlineShopWebApp.Services;
 
 namespace shop.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IProductsStorage _productsStorage;
+        private readonly IUsersStorage _usersStorage;
 
-        public HomeController(IProductsStorage productsStorage)
+        public HomeController(IProductsStorage productsStorage, IUsersStorage usersStorage)
         {
             _productsStorage = productsStorage;
+            _usersStorage = usersStorage;
         }
 
-        public IActionResult Index(string? searchName = null)
+        public IActionResult Index(string? searchName)
         {
             var productsDb = _productsStorage.GetAll();
-            var products = new List<ProductViewModel>();
-
-            foreach (var productDb in productsDb) 
-            {
-                var product = new ProductViewModel
-                {
-                    Id = productDb.Id,
-                    Name = productDb.Name,
-                    Price = productDb.Price,
-                    Description = productDb.Description,
-                    ImageUrl = productDb.ImageUrl,
-                };
-
-                products.Add(product);
-            }
+            var products = MapperHelper.ToProductViewModel(productsDb);
 
             if (string.IsNullOrEmpty(searchName) == false || string.IsNullOrWhiteSpace(searchName) == false)
             {
@@ -41,6 +30,7 @@ namespace shop.Controllers
                     .ToList();
             }
 
+            ViewBag.UserId = _usersStorage.GetCurrentUserId();
             ViewBag.SearchName = searchName;
             return View(products);
         }

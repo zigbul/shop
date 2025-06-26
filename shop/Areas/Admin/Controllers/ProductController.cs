@@ -2,6 +2,7 @@
 using OnlineShop.Db;
 using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Properties.Helpers;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -18,14 +19,13 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Details(Guid id)
         {
             var productDb = _productsStorage.TryGetById(id);
-            var product = new ProductViewModel
+
+            if (productDb == null)
             {
-                Id = productDb.Id,
-                Name = productDb.Name,
-                Price = productDb.Price,
-                Description = productDb.Description,
-                ImageUrl = productDb.ImageUrl,
-            };
+                return RedirectToAction("Products", "Home");
+            }
+
+            var product = MapperHelper.ToProductViewModel(productDb);
 
             return View(product);
         }
@@ -34,14 +34,13 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Edit(Guid id)
         {
             var productDb = _productsStorage.TryGetById(id);
-            var product = new ProductViewModel
+
+            if (productDb == null)
             {
-                Id = productDb.Id,
-                Name = productDb.Name,
-                Price = productDb.Price,
-                Description = productDb.Description,
-                ImageUrl = productDb.ImageUrl,
-            };
+                return RedirectToAction("Products", "Home");
+            }
+
+            var product = MapperHelper.ToProductViewModel(productDb);
 
             return View(product);
         }
@@ -60,13 +59,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 return View(product);
             }
 
-            var productDb = new Product
-            {
-                Name = product.Name,
-                Price = product.Price,
-                Description = product.Description,
-                ImageUrl = product.ImageUrl
-            };
+            var productDb = MapperHelper.ToProduct(product);
 
             _productsStorage.Update(productDb);
 
@@ -93,13 +86,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 return View(product);
             }
 
-            var productDb = new Product
-            {
-                Name = product.Name,
-                Price = product.Price,
-                Description = product.Description,
-                ImageUrl = product.ImageUrl
-            };
+            var productDb = MapperHelper.ToProduct(product);
 
             _productsStorage.Add(productDb);
 

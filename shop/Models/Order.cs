@@ -25,8 +25,7 @@ namespace OnlineShopWebApp.Models
         [Phone(ErrorMessage = "Введите номер в формате +7 123 456 78 90")]
         public required string Phone { get; set; }
 
-        [BindNever]
-        public Cart? Cart { get; set; }
+        public CartViewModel? Cart { get; set; }
 
         public OrderStatuses Status { get; set; }
 

@@ -13,5 +13,7 @@ namespace OnlineShopWebApp.Services
         User? Get(Auth auth);
 
         User? GetById(Guid id);
+
+        Guid GetCurrentUserId();
     }
 }

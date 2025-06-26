@@ -16,6 +16,8 @@ namespace OnlineShopWebApp.Services
             }
         ];
 
+        private Guid _currentUserId;
+
         public void Add(User user)
         {
             _users.Add(user);
@@ -33,12 +35,24 @@ namespace OnlineShopWebApp.Services
 
         public User? Get(Auth auth)
         {
-            return _users.FirstOrDefault(user => user.Password == auth.Password && user.Login == auth.Login);
+            var user = _users.FirstOrDefault(user => user.Password == auth.Password && user.Login == auth.Login);
+
+            if (user != null)
+            {
+                _currentUserId = user.Id;
+            }
+
+            return user;
         }
 
         public User? GetById(Guid id)
         {
             return _users.FirstOrDefault(user => user.Id == id);
+        }
+
+        public Guid GetCurrentUserId()
+        {
+            return _currentUserId;
         }
     }
 }
