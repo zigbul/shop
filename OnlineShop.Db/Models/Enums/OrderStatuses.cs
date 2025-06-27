@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OnlineShopWebApp.Models.Enums
+namespace OnlineShop.Dbp.Models.Enums
 {
     public enum OrderStatuses
     {

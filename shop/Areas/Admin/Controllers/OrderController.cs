@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Models.Enums;
-using OnlineShopWebApp.Services;
+using OnlineShop.Db.Services;
+using OnlineShop.Dbp.Models.Enums;
+using OnlineShopWebApp.Properties.Helpers;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -15,24 +16,25 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int id)
+        public IActionResult Details(Guid id)
         {
             var order = _ordersStorage.TryGetById(id);
 
-            return View(order);
+            return View(order?.ToOrderViewModel());
         }
 
         [HttpPost]
-        public IActionResult Details(int id, OrderStatuses status)
+        public IActionResult Details(Guid id, OrderStatuses status)
         {
             var order = _ordersStorage.TryGetById(id);
 
             if (order != null)
             {
+                _ordersStorage.ChangeStatus(id, status);
                 order.Status = status;
             }
 
-            return View(order);
+            return View(order?.ToOrderViewModel());
         }
     }
 }

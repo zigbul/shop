@@ -1,9 +1,8 @@
 ﻿@using OnlineShopWebApp.Models
-@using OnlineShopWebApp.Models.Enums
 @using OnlineShopWebApp.Properties
 @using OnlineShopWebApp.Properties.Helpers
 
-@model Order
+@model OrderViewModel
 
 <div class="row">
     <nav class="col-3">
@@ -36,7 +35,7 @@
             </tr>
             <tr>
                 <td>Сумма заказа:</td>
-                <td>@Model.Cart?.Cost.ToString("0.00") ₽</td>
+                <td>@Model.Cost.ToString("0.00") ₽</td>
             </tr>
             <tr>
                 <td>Статус заказа:</td>

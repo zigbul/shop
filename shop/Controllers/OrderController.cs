@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShop.Db;
+using OnlineShop.Db.Models;
+using OnlineShop.Db.Services;
 using OnlineShopWebApp.Models;
-using OnlineShopWebApp.Properties.Helpers;
-using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -25,14 +24,29 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(Order order)
+        public IActionResult Index(OrderViewModel order)
         {
-            var cartDb = _cartsStorage.TryGetCardByUserId(Guid.NewGuid());
-            order.Cart = MapperHelper.ToCartViewModel(cartDb);
+            var userId = Guid.Parse("5c18c843-52c5-455d-b44f-bec0913d047d");
+            var cartDb = _cartsStorage.TryGetCardByUserId(userId);
 
-            if (ModelState.IsValid && order.Cart != null)
+            if (ModelState.IsValid && cartDb != null)
             {
-                _ordersStorage.Add(order);
+                var oderDb = new Order()
+                {
+                    Name = order.Name,
+                    Address = order.Address,
+                    Email = order.Email,
+                    Phone = order.Phone,
+                    Items = cartDb.Items.Select(item => new OrderItem()
+                    {
+                        ProductId = item.Product.Id,
+                        OrderId = order.Id,
+                        Amount = item.Amount,
+                    })
+                    .ToList(),
+                };
+
+                _ordersStorage.Add(oderDb);
                 _cartsStorage.Remove(cartDb);
 
                 ViewBag.IsVisible = true;

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShop.Db;
+using OnlineShop.Db.Services;
 using OnlineShopWebApp.Properties.Helpers;
 using OnlineShopWebApp.Services;
 
@@ -17,7 +17,7 @@ namespace OnlineShopWebApp.Views.Shared.Components.Cart
         public IViewComponentResult Invoke()
         {
             var cartDb = _cartsStorage.TryGetCardByUserId(Guid.NewGuid());
-            var cart = MapperHelper.ToCartViewModel(cartDb);
+            var cart = cartDb.ToCartViewModel();
 
             var allItemsAmount = cart?.ItemsAmount;
 

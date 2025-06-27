@@ -2,7 +2,7 @@
 @using OnlineShopWebApp.Properties
 @using OnlineShopWebApp.Properties.Helpers
 
-@model List<Order>
+@model List<OrderViewModel>
 
 <div class="row">
     <nav class="col-3">
@@ -28,7 +28,7 @@
                 {
                     <tr>
                         <td><a asp-area="Admin" asp-controller="Order" asp-action="Details" asp-route-id="@order.Id">@order.Id</a></td>
-                        <td>@order.Cart?.Cost.ToString("0.00") ₽</td>
+                        <td>@order.Cost.ToString("0.00") ₽</td>
                         <td>@OrdersStatusHelper.Statuses[order.Status]</td>
                         <td>@order.Email</td>
                         <td>@order.Date.ToShortDateString()</td>

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db;
+using OnlineShop.Db.Services;
 using OnlineShopWebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +9,7 @@ builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(b
 
 builder.Services.AddTransient<IProductsStorage, DbProductsStorage>();
 builder.Services.AddTransient<ICartsStorage, DbCartsStorage>();
-builder.Services.AddSingleton<IOrdersStorage, InMemoryOrdersStorage>();
+builder.Services.AddTransient<IOrdersStorage, DbOrdersStorage>();
 builder.Services.AddSingleton<IRolesStorage, InMemoryRolesStorage>();
 builder.Services.AddSingleton<IUsersStorage, InMemoryUsersStorage>();
 

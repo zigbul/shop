@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using shop.Models;
 using System.Diagnostics;
-using OnlineShop.Db;
 using OnlineShopWebApp.Properties.Helpers;
 using OnlineShopWebApp.Services;
+using OnlineShop.Db.Services;
 
 namespace shop.Controllers
 {
@@ -21,7 +21,7 @@ namespace shop.Controllers
         public IActionResult Index(string? searchName)
         {
             var productsDb = _productsStorage.GetAll();
-            var products = MapperHelper.ToProductViewModel(productsDb);
+            var products = productsDb.ToProductViewModel();
 
             if (string.IsNullOrEmpty(searchName) == false || string.IsNullOrWhiteSpace(searchName) == false)
             {

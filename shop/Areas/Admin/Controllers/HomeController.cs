@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShop.Db;
+using OnlineShop.Db.Services;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Properties.Helpers;
 using OnlineShopWebApp.Services;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
@@ -29,7 +30,8 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult Orders()
         {
-            var orders = _ordersStorage.GetAll();
+            var ordersDb = _ordersStorage.GetAll();
+            var orders = ordersDb.ToOrderViewModel();
 
             return View(orders);
         }

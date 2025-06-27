@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShop.Db;
 using OnlineShop.Db.Models;
+using OnlineShop.Db.Services;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Properties.Helpers;
 
@@ -25,7 +25,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 return RedirectToAction("Products", "Home");
             }
 
-            var product = MapperHelper.ToProductViewModel(productDb);
+            var product = productDb.ToProductViewModel();
 
             return View(product);
         }
@@ -40,7 +40,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 return RedirectToAction("Products", "Home");
             }
 
-            var product = MapperHelper.ToProductViewModel(productDb);
+            var product = productDb.ToProductViewModel();
 
             return View(product);
         }
@@ -59,7 +59,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 return View(product);
             }
 
-            var productDb = MapperHelper.ToProduct(product);
+            var productDb = product.ToProduct();
 
             _productsStorage.Update(productDb);
 
@@ -86,7 +86,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 return View(product);
             }
 
-            var productDb = MapperHelper.ToProduct(product);
+            var productDb = product.ToProduct();
 
             _productsStorage.Add(productDb);
 

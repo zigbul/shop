@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShop.Db;
+using OnlineShop.Db.Services;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Properties.Helpers;
 using OnlineShopWebApp.Services;
@@ -33,7 +33,7 @@ namespace OnlineShopWebApp.Controllers
             {
                 Id = cartDb.Id,
                 UserId = cartDb.UserId,
-                Items = MapperHelper.ToCartItemViewModel(cartDb.Items),
+                Items = cartDb.Items.ToCartItemViewModel(),
             };
 
             return View(cart);

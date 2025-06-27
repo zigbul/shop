@@ -1,4 +1,4 @@
-﻿using OnlineShopWebApp.Models.Enums;
+﻿using OnlineShop.Dbp.Models.Enums;
 
 namespace OnlineShopWebApp.Properties.Helpers
 {

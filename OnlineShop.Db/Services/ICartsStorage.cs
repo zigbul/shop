@@ -1,6 +1,6 @@
 ﻿using OnlineShop.Db.Models;
 
-namespace OnlineShop.Db
+namespace OnlineShop.Db.Services
 {
     public interface ICartsStorage
     {

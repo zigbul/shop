@@ -22,7 +22,7 @@ else
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach(var item in Model.Items)
+                    @foreach (var item in Model.Items)
                     {
                         <tr>
                             <td>@item.Product.Name</td>
@@ -30,23 +30,19 @@ else
                             <td>@item.Amount шт.</td>
                             <td>@item.Cost руб</td>
                             <td>
-                                <a 
-                                    class="btn btn-light" 
-                                    asp-controller="Cart"
-                                    asp-action="Add"
-                                    asp-route-productId="@item.Product.Id"
-                                >
+                                <a class="btn btn-light"
+                                   asp-controller="Cart"
+                                   asp-action="Add"
+                                   asp-route-productId="@item.Product.Id">
                                     +
                                 </a>
                             </td>
                             <td>
-                                <a 
-                                    class="btn btn-light" 
-                                    asp-controller="Cart"
-                                    asp-action="Remove"
-                                    asp-route-itemId="@item.Id"
-                                    asp-route-cartId="@Model.Id"
-                                >
+                                <a class="btn btn-light"
+                                   asp-controller="Cart"
+                                   asp-action="Remove"
+                                   asp-route-itemId="@item.Id"
+                                   asp-route-cartId="@Model.Id">
                                     -
                                 </a>
                             </td>
@@ -58,9 +54,17 @@ else
             <h4 class="text-end">Итого:<br />@Model.Cost руб</h4>
 
             <div class="d-flex justify-content-between">
-                <a class="btn btn-primary" href="/home/index">Продолжить покупки</a>
-                <a class="btn btn-success" href="/order/index">Офромить заказ</a>
+                <a class="btn btn-primary"
+                   asp-controller="Home"
+                   asp-action="Index">
+                    Продолжить покупки
+                </a>
+                <a class="btn btn-success"
+                   asp-controller="Order"
+                   asp-action="Index">
+                    Офромить заказ
+                </a>
             </div>
-        </div>        
+        </div>
     </div>
 }
